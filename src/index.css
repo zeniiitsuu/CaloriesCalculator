@@ -1,0 +1,332 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark light;
+
+  /* Light theme (Cinnamoroll colors) */
+  --light-bg: #d1ebf6;  /* Lightest blue */
+  --light-accent: #4cb4f0;  /* Main blue */
+  --light-accent-hover: #b0daec;  /* Medium blue */
+  --light-panel: rgba(255, 255, 255, 0.8);
+  --light-text: #333333;
+  --light-border: rgba(76, 180, 240, 0.2);
+  
+  /* Dark theme */
+  --dark-bg: #1a1a1a;
+  --dark-panel: rgba(45, 45, 45, 0.3);
+  --dark-accent: #6366f1;
+  --dark-text: #ffffff;
+  --dark-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  @apply min-h-screen transition-colors duration-300;
+}
+
+/* Dark theme styles (default) */
+.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.dark .glass-panel {
+  background-color: var(--dark-panel);
+  border-color: var(--dark-border);
+}
+
+.dark .btn-primary {
+  @apply bg-accent hover:bg-accent-light;
+}
+
+/* Light theme styles */
+.light {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+}
+
+.light .glass-panel {
+  background: white;
+  border-color: var(--light-border);
+}
+
+.light .btn-primary {
+  @apply bg-gradient-to-r from-[#4cb4f0] to-[#b0daec] text-white 
+    hover:from-[#b0daec] hover:to-[#d1ebf6];
+}
+
+.light .input-field {
+  @apply bg-white/50 border-[#4cb4f0]/30 text-gray-800 placeholder-gray-400;
+}
+
+.light .progress-bar {
+  @apply bg-white/30;  /* Fixed broken progress bar background */
+}
+
+.light .progress-bar-fill {
+  @apply bg-gradient-to-r from-[#4cb4f0] to-[#b0daec];
+}
+
+.glass-panel {
+  @apply backdrop-blur-xl border rounded-2xl shadow-2xl transition-all duration-300;
+  background: var(--secondary-bg);
+  border-color: rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.input-field {
+  @apply w-full bg-secondary/30 border border-white/10 rounded-xl px-4 py-3 
+    focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all duration-300
+    hover:border-[#4cb4f0]/50 placeholder-gray-500;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-accent to-accent-light text-white font-semibold 
+    py-3 px-6 rounded-xl transition-all duration-300 ease-in-out transform 
+    hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent/50
+    hover:shadow-lg hover:shadow-accent/25 active:scale-95;
+}
+
+.btn-primary:disabled {
+  @apply opacity-50 cursor-not-allowed hover:scale-100 hover:shadow-none;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Progress Bar - Default (Dark theme) */
+.progress-bar {
+  @apply h-2 rounded-full bg-secondary/30 overflow-hidden;
+}
+
+.progress-bar-fill {
+  @apply h-full bg-gradient-to-r from-accent to-accent-light transition-all duration-500 ease-out;
+}
+
+/* Progress Bar - Light theme rainbow style */
+.light .progress-bar {
+  @apply bg-white/30;
+}
+
+.light .progress-bar-fill {
+  background: linear-gradient(90deg, 
+    #ffb3ba 0%,    /* Pastel pink */
+    #ffdfba 16.67%, /* Pastel orange */
+    #ffffba 33.33%, /* Pastel yellow */
+    #baffc9 50%,    /* Pastel green */
+    #bae1ff 66.67%, /* Pastel blue */
+    #d8b5ff 83.33%, /* Pastel purple */
+    #ffb3ba 100%    /* Back to pink for seamless loop */
+  );
+  background-size: 200% 100%;
+  animation: rainbow-animation 8s linear infinite; /* Slower animation (8s instead of 3s) */
+}
+
+@keyframes rainbow-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.macro-pill {
+  @apply px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
+    bg-gradient-to-r hover:scale-105 cursor-help;
+}
+
+.protein {
+  @apply from-green-500/20 to-green-600/20 text-green-400;
+}
+
+.carbs {
+  @apply from-blue-500/20 to-blue-600/20 text-blue-400;
+}
+
+.fats {
+  @apply from-yellow-500/20 to-yellow-600/20 text-yellow-400;
+}
+
+.tooltip {
+  @apply absolute z-50 px-3 py-2 text-sm font-medium text-white bg-gray-900 
+    rounded-lg shadow-sm opacity-0 invisible group-hover:opacity-100 
+    group-hover:visible transition-all duration-300 -translate-y-2 
+    group-hover:translate-y-0 bottom-full mb-2 left-1/2 -translate-x-1/2;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.tooltip::after {
+  content: '';
+  @apply absolute left-1/2 bottom-0 w-0 h-0 -translate-x-1/2 translate-y-full;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #111827; /* matches bg-gray-900 */
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
+}
+
+.bmi-gauge {
+  @apply relative h-4 rounded-full overflow-hidden bg-gradient-to-r 
+    from-blue-500 via-green-500 via-yellow-500 to-red-500;
+}
+
+.bmi-marker {
+  @apply absolute top-0 w-2 h-full bg-white transform -translate-x-1/2 
+    transition-all duration-500 ease-out;
+}
+
+.metric-card {
+  @apply glass-panel p-4 transition-all duration-300 hover:scale-[1.02] 
+    hover:bg-white/[0.09] cursor-default;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-value-change {
+  animation: value-change 0.5s ease-in-out;
+}
+
+@keyframes value-change {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+    color: theme('colors.accent-light');
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.input-field:focus-within {
+  @apply ring-2 ring-[#4cb4f0]/50;
+}
+
+.input-field:hover {
+  @apply border-[#4cb4f0]/50;
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(12px);
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+  @apply transition-transform duration-300 hover:scale-110;
+}
+
+.light .theme-toggle {
+  @apply text-[#4cb4f0];
+}
+
+.dark .theme-toggle {
+  @apply text-accent;
+}
+
+/* Update other elements that use accent colors */
+.light .macro-pill {
+  @apply bg-white/50 border-[#4cb4f0]/30;
+}
+
+.light .text-accent {
+  color: var(--light-accent);
+}
+
+.light .text-accent-light {
+  color: var(--light-accent-hover);
+}
+
+.light .bg-accent {
+  background-color: var(--light-accent);
+}
+
+.light .from-accent {
+  --tw-gradient-from: var(--light-accent);
+}
+
+.light .to-accent-light {
+  --tw-gradient-to: var(--light-accent-hover);
+}
+
+/* Update other hover states */
+.light .hover\:bg-accent\/80:hover {
+  @apply hover:bg-[#4cb4f0]/80;
+}
+
+.light .hover\:bg-accent\/20:hover {
+  @apply hover:bg-[#4cb4f0]/20;
+}
+
+.light .hover\:text-accent-light:hover {
+  color: var(--light-accent-hover);
+}
+
+/* Update active states */
+.light .active\:bg-accent:active {
+  background-color: var(--light-accent);
+}
+
+/* Update text accents */
+.light .text-accent {
+  color: var(--light-accent);
+}
+
+.light .text-accent-light {
+  color: var(--light-accent-hover);
+}
+
+/* BMI gauge for light theme - using pastel colors */
+.light .bmi-gauge {
+  @apply bg-none;
+  background: linear-gradient(90deg, 
+    #bae1ff 0%,    /* Pastel blue */
+    #baffc9 33%,   /* Pastel green */
+    #ffffba 66%,   /* Pastel yellow */
+    #ffb3ba 100%   /* Pastel pink */
+  );
+}
+
+/* Improve scroll positioning */
+.results-section {
+  scroll-margin-top: 20px;
+}
+
+/* Add styles for all text colors in light theme */
+.light .text-purple-500, 
+.light .text-purple-600, 
+.light .text-indigo-500, 
+.light .text-indigo-600 {
+  color: var(--light-accent);
+}
+
+/* Make sure all purple text is blue in light theme */
+.light .text-blue-500,
+.light [class*="text-purple"],
+.light [class*="text-indigo"] {
+  color: var(--light-accent);
+} 
