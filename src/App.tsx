@@ -69,6 +69,14 @@ const translations = {
     athlete: 'Athlete',
     athleteDesc: '2x training per day',
     developedBy: 'Project developed by',
+    bmiUnderweight: 'Underweight',
+    bmiNormal: 'Normal weight',
+    bmiOverweight: 'Overweight',
+    bmiObese: 'Obese',
+    gaugeUnderweight: 'Underweight',
+    gaugeNormal: 'Normal',
+    gaugeOverweight: 'Overweight',
+    gaugeObese: 'Obese',
   },
   pt: {
     title: 'Calculadora de Calorias',
@@ -108,6 +116,14 @@ const translations = {
     athlete: 'Atleta',
     athleteDesc: '2x treino por dia',
     developedBy: 'Projeto desenvolvido por',
+    bmiUnderweight: 'Abaixo do peso',
+    bmiNormal: 'Peso normal',
+    bmiOverweight: 'Sobrepeso',
+    bmiObese: 'Obeso',
+    gaugeUnderweight: 'Abaixo do peso',
+    gaugeNormal: 'Normal',
+    gaugeOverweight: 'Sobrepeso',
+    gaugeObese: 'Obeso',
   },
   ja: {
     title: 'カロリー計算機',
@@ -147,6 +163,14 @@ const translations = {
     athlete: 'アスリート',
     athleteDesc: '1日2回のトレーニング',
     developedBy: '開発者：',
+    bmiUnderweight: '低体重',
+    bmiNormal: '普通体重',
+    bmiOverweight: '過体重',
+    bmiObese: '肥満',
+    gaugeUnderweight: '低体重',
+    gaugeNormal: '普通',
+    gaugeOverweight: '過体重',
+    gaugeObese: '肥満',
   }
 };
 
@@ -272,10 +296,10 @@ function App() {
   }
 
   const getBMICategory = (bmi: number) => {
-    if (bmi < 18.5) return 'Underweight'
-    if (bmi < 25) return 'Normal weight'
-    if (bmi < 30) return 'Overweight'
-    return 'Obese'
+    if (bmi < 18.5) return translations[language].bmiUnderweight
+    if (bmi < 25) return translations[language].bmiNormal
+    if (bmi < 30) return translations[language].bmiOverweight
+    return translations[language].bmiObese
   }
 
   const calculateCalories = () => {
@@ -602,10 +626,10 @@ function App() {
                       />
                     </div>
                     <div className="flex justify-between text-sm text-gray-400 mb-2">
-                      <span>Underweight</span>
-                      <span>Normal</span>
-                      <span>Overweight</span>
-                      <span>Obese</span>
+                      <span>{translations[language].gaugeUnderweight}</span>
+                      <span>{translations[language].gaugeNormal}</span>
+                      <span>{translations[language].gaugeOverweight}</span>
+                      <span>{translations[language].gaugeObese}</span>
                     </div>
                     <motion.p 
                       className="text-2xl font-bold text-accent"
